@@ -1,20 +1,19 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux'
 import type {} from 'redux-thunk/extend-redux';
 import useTypedSelector from '../hooks/useTypedSelector';
-import { fetchUsers } from '../store/action-creators/users';
+import useActions from '../hooks/useActions';
 
 export default function UserList() {
     const {users, loading, error} = useTypedSelector(state => state.user)
-    const dispatch = useDispatch()
+    const {fetchUsers} = useActions()
 
     useEffect(()=>{
-        dispatch(fetchUsers())
+        fetchUsers()
     }, [])
     
     return (
         <div>
-            {loading ? <h1>Loading...</h1> : <ul>{users.map(user=><li key={user.id}>{user.name}</li>)}</ul>}
+            {loading ? <h1>Loading...</h1> : error ? <h1>{error}</h1> : <ul>{users.map(user=><li key={user.id}>{user.name}</li>)}</ul>}
         </div>
     )
 }
