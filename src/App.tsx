@@ -1,9 +1,9 @@
-import UserList from "./components/UserList";
+import UserComponents from "./components/UserComponents";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <UserList/>
+      <UserComponents/>
     </div>
   );
 }
